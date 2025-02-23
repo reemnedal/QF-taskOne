@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+
+
+
+
+function checkOne(myCheckBox){
+
+const card = myCheckBox.closest(".cards");
+  if (myCheckBox.checked) {
+    card.style.backgroundColor = "blue";
+              count++;
+              console.log("count"+ count)
+
+              document.getElementById('countDisplay').textContent = count;
+
+          }
+
+
+
+
+  else {
+
+    card.style.backgroundColor = "#8dc29b";
+              --count;
+              console.log("count"+ count)
+
+              document.getElementById('countDisplay').textContent = count;
+
+          }
+
+  }
+
+</script>
+
+  <span id="countDisplay"> </span>
+    <script>
+        let count = 0;
+
+        function checkAll(myCheckBox) {
+            let checkboxes = document.querySelectorAll("input[type='checkbox']");
+            count=0
+            if (myCheckBox.checked) {
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = true;
+                    const nodeList = document.querySelectorAll(".cards");
+                    for (let i = 0; i < nodeList.length; i++) {
+                        nodeList[i].style.backgroundColor = "blue";
+                        count++;
+                        console.log("count"+ count)
+
+                        document.getElementById('countDisplay').textContent = count;
+
+                    }
+
+
+
+                } );
+            } else {
+              count=0;
+                 checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = false;
+                    const nodeList = document.querySelectorAll(".cards");
+                    for (let i = 0; i < nodeList.length; i++) {
+                        nodeList[i].style.backgroundColor = "#8dc29b";
+
+                        console.log("count"+ count)
+
+                        document.getElementById('countDisplay').textContent = count;
+
+                    }
+                });
+            }
+        }
+
+
+
+
+    </script>
+
+    <input type="checkbox" id="check-all" onchange="checkAll(this)">
+    <label for="check-all">Select All</label>
+
+    <script type="module">
+   document.body.style.margin = "10%";
+
+
+
+            let apiResponse;
+
+            let response = await fetch('https://api.magicthegathering.io/v1/cards');
+
+            if (response.ok) {
+                apiResponse = await response.json();
+
+                document.getElementById('container').innerHTML = apiResponse.cards.map((item) => `
+                    <div id="childDiv" class="cards">
+                        <input type="checkbox"  onchange="checkOne(this)"  >
+                        ${item.name} ${item.colors} ${item.setName}
+                        <img src="${item.imageUrl}">
+                    </div>`).join('');
+
+                const mainContainer = document.getElementById("container");
+                mainContainer.style.display = "grid";
+                mainContainer.style.gridTemplateColumns = "repeat(auto-fit, minmax(250px, 1fr))";
+                mainContainer.style.gridGap = "1rem";
+
+                const nodeList = document.querySelectorAll(".cards");
+                for (let i = 0; i < nodeList.length; i++) {
+                    nodeList[i].style.backgroundColor = "#8dc29b";
+                    nodeList[i].style.padding = "2%";
+                    nodeList[i].style.border = "thick solid #8dc29b";
+                }
+
+                console.log(apiResponse);
+            } else {
+                alert("HTTP-Error: " + response.status);
+            }
+
+    </script>
+
+    <div class="container" id="container"></div>
+
+
+
+<!--
+
+
+ session solution
+console.log( 'Hello World')
+
+const fetchCards = async () => {
+  fetch('')
+}
+
+
+
+const handleBtnCardClick = (e) => {
+  // logic to determine if the card is already clicked
+  // if so toggle bg
+
+}
+
+const generateCardHTML = (id) => {
+  const wrapper = document.createElement('div')
+  wrapper.className = 'wrapper'
+
+  const h2Element = document.createElement('h2')
+
+  // wrapper.appendChild
+  // h2Element.style.
+
+  // ...
+
+
+  return wrapper
+}
+
+class Card {
+  // name, manaCost
+
+  draw (id) {
+
+  }
+}
+
+class CardList {
+  // name, manaCost
+
+  // api fetch data
+  //fetchCards
+  // save it in a property internally
+  draw (id) {
+      // For loop
+      // instance Card
+  }
+}
+
+// Closure Counter
+
+
+
+
+class Page {
+  // instance for CardList
+  // new CardList
+
+  // Counter
+
+  // Reset all & Select All
+} -->
+</body>
+</html>
